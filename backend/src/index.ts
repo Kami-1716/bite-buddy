@@ -1,7 +1,16 @@
 import app from "./app";
+import connectDB from "./db";
 
+connectDB()
+  .then(() => {
+    app.on("error", (error) => {
+      console.log("Error while starting the server: ", error);
+    });
 
-
-app.listen(3000, () => {
-  console.log('server started at port: 3000')
-})
+    app.listen(process.env.PORT, () => {
+      console.log("Server is running on port 5000");
+    });
+  })
+  .catch((error) => {
+    console.log("Error while connecting to the database: ", error);
+  });
