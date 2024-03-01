@@ -22,15 +22,11 @@ export const UserProfileFormSchema = z.object({
   city: z.string().min(1, "City is required"),
 });
 
-type UserFormData = z.infer<typeof UserProfileFormSchema>;
+export type UserFormData = z.infer<typeof UserProfileFormSchema>;
 
-type Prop = {
-  onSave: (data: UserFormData) => void;
+export type Prop = {
+  onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
-};
-
-const onSave = (data: UserFormData) => {
-  console.log(data);
 };
 
 const UserProfileForm = ({ onSave, isLoading }: Prop) => {
@@ -41,7 +37,7 @@ const UserProfileForm = ({ onSave, isLoading }: Prop) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSave)}
-        className="space-y-4 bg-gray-50 rounded-lg md:p-10"
+        className="space-y-4 bg-gray-50 p-6 rounded-lg md:p-10"
       >
         <div>
           <h2 className="text-2xl font-bold">User Profile Form</h2>
